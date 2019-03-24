@@ -1,8 +1,26 @@
 .search-input-container {
-  width: inherit;
-  position: absolute;
+  position: relative;
 
-  .search-input-list-container {
-    position: relative;
+  .search-input {
+    width: 300px;
+  }
+
+  .search-input-list {
+    position: absolute;
+
+    .search-input-list-item {
+      display: block;
+      width: auto;
+
+      .left-element {
+        display: inline-block;
+        margin-right: 50px;
+      }
+
+      .right-element {
+        display: inline-block;
+        float: right;
+      }
+    }
   }
 }

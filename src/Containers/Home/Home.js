@@ -6,12 +6,8 @@ class Home extends Component {
   render() {
     return (
       <div className={'home-container'}>
-        <div className={'input-container'}>
-          <SearchInput/>
-        </div>
-        <div>
-          List
-        </div>
+        <SearchInput />
+        <div>List</div>
       </div>
     )
   }

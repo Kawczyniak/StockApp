@@ -1,15 +1,15 @@
 import { takeLatest, all } from 'redux-saga/effects'
 
 /* ------------- Types ------------- */
-// import { SELECT_LIST_ID } from '../Redux/ShoppingRedux'
+import { GET_STOCK_SEARCH_LIST } from '../Redux/StockRedux'
 
 /* ------------- Sagas ------------- */
-// import { selectListSaga } from './StockSaga'
+import { getStockSearchListSaga } from './StockSaga'
 
 /* ------------- Connect Types To Sagas ------------- */
 
 export default function* rootSaga() {
   yield all([
-    // takeLatest(SELECT_LIST_ID, selectListSaga),
+    takeLatest(GET_STOCK_SEARCH_LIST.ATTEMPT, getStockSearchListSaga),
   ])
 }

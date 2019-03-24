@@ -2,15 +2,15 @@ import axios from 'axios'
 import StockSelector from '../Redux/StockRedux'
 
 const api = axios.create({
-  baseURL: 'https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=BA&apikey=5ZXUVVOXJ5S4ECMC',
+  baseURL: 'https://www.alphavantage.co',
   headers: { 'Content-Type': 'application/json' },
   timeout: 30000,
 })
 
-api.interceptors.request.use(request => {
-  console.log('Request', request)
-  return request
-})
+// api.interceptors.request.use(request => {
+//   console.log('Request', request)
+//   return request
+// })
 
 api.interceptors.response.use(response => {
   console.log('Response:', response)
@@ -18,28 +18,20 @@ api.interceptors.response.use(response => {
 })
 
 const runApi = async ({ method = 'get', body, path }) => {
-  const { data, ok, status } = await api[method](`${path}`, body)
+  const { data, statusText, status } = await api[method](`${path}`, body)
 
-  if (ok) {
+  if (statusText === "OK") {
     return data
   }
   const toReturn = { status, data }
   throw toReturn
 }
 
-// const updateApiHeaders = data => {
-//   api.setHeaders({
-//     'Content-Type': 'application/json',
-//   })
-// }
+// Stock API
 
-// Auth API
-
-const login = body =>
+const searchEngine = ({ search }) =>
   runApi({
-    method: 'post',
-    path: `/auth/`,
-    body,
+    path: `query?apikey=5ZXUVVOXJ5S4ECMC&function=SYMBOL_SEARCH&keywords=${search}`,
   })
 
 // Helpers
@@ -51,5 +43,5 @@ const parseGetParams = params =>
   )
 
 export default {
-
+  searchEngine,
 }
