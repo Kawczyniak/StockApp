@@ -7,20 +7,36 @@ const api = axios.create({
   timeout: 30000,
 })
 
-// api.interceptors.request.use(request => {
-//   console.log('Request', request)
-//   return request
-// })
+const apiLogo = axios.create({
+  baseURL: 'https://autocomplete.clearbit.com/v1/companies',
+  headers: { 'Content-Type': 'application/json' },
+  timeout: 30000,
+})
 
 api.interceptors.response.use(response => {
   console.log('Response:', response)
   return response
 })
 
+apiLogo.interceptors.response.use(response => {
+  console.log('Response logoApi:', response)
+  return response
+})
+
 const runApi = async ({ method = 'get', body, path }) => {
   const { data, statusText, status } = await api[method](`${path}`, body)
 
-  if (statusText === "OK") {
+  if (statusText === 'OK') {
+    return data
+  }
+  const toReturn = { status, data }
+  throw toReturn
+}
+
+const runLogoApi = async ({ method = 'get', body, path }) => {
+  const { data, statusText, status } = await apiLogo[method](`${path}`, body)
+
+  if (statusText === 'OK') {
     return data
   }
   const toReturn = { status, data }
@@ -29,9 +45,14 @@ const runApi = async ({ method = 'get', body, path }) => {
 
 // Stock API
 
-const searchEngine = ({ search }) =>
+const searchEngine = params =>
   runApi({
-    path: `query?apikey=5ZXUVVOXJ5S4ECMC&function=SYMBOL_SEARCH&keywords=${search}`,
+    path: `query${parseGetParams(params)}`,
+  })
+
+const logo = params =>
+  runLogoApi({
+    path: `suggest${parseGetParams(params)}`,
   })
 
 // Helpers
@@ -43,5 +64,6 @@ const parseGetParams = params =>
   )
 
 export default {
+  logo,
   searchEngine,
 }

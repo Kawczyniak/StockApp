@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import { Input, ListGroup, ListGroupItem } from 'reactstrap'
 import './SearchInput.scss'
-import { StockSelector, getStockSearchList, addStockItem } from '../../Redux/StockRedux'
-import connect from 'react-redux/es/connect/connect'
+import {
+  StockSelector,
+  getStockSearchList,
+  addStockItem,
+  wipeStockSearchList,
+} from '../../Redux/StockRedux'
+import { connect } from 'react-redux'
 
 class SearchInput extends Component {
   constructor(props) {
@@ -24,15 +29,12 @@ class SearchInput extends Component {
   onClick = item => {
     const { addStockItem } = this.props
 
-    addStockItem(item)
+    addStockItem({ item })
   }
 
   render() {
     const { searchList } = this.props
     const { search } = this.state
-    console.log(this.state)
-
-    console.log('searchList', searchList)
 
     return (
       <div className={'search-input-container'}>
@@ -62,7 +64,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getStockSearchList: getStockSearchList.Attempt,
-  addStockItem,
+  addStockItem: addStockItem,
+  wipeStockSearchList,
 }
 
 export default connect(
