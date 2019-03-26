@@ -50,6 +50,11 @@ const searchEngine = params =>
     path: `query${parseGetParams(params)}`,
   })
 
+const stockEndpoint = params =>
+  runApi({
+    path: `query${parseGetParams(params)}`,
+  })
+
 const logo = params =>
   runLogoApi({
     path: `suggest${parseGetParams(params)}`,
@@ -66,4 +71,5 @@ const parseGetParams = params =>
 export default {
   logo,
   searchEngine,
+  stockEndpoint,
 }

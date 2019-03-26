@@ -9,7 +9,8 @@ export const GET_STOCK_SEARCH_LIST = createAsyncType('stock/GET_STOCK_SEARCH_LIS
 export const ADD_STOCK_ITEM = 'stock/ADD_STOCK_ITEM'
 export const REMOVE_STOCK_ITEM = 'stock/REMOVE_STOCK_ITEM'
 export const WIPE_STOCK_SEARCH_LIST = 'stock/WIPE_STOCK_ITEM'
-export const UPDATE_LOGO_STOCK_ITEM = 'stock/UPDATE_LOGO_STOCK_ITEM'
+export const UPDATE_STOCK_ITEM = 'stock/UPDATE_STOCK_ITEM'
+export const FETCH_STOCK_ITEM_DETAILS = 'stock/FETCH_STOCK_ITEM_DETAILS'
 
 /* ------------- Action Creators ------------- */
 // Async (Attempt, Success, Failure)
@@ -19,7 +20,8 @@ export const getStockSearchList = createAsyncAction(GET_STOCK_SEARCH_LIST)
 export const addStockItem = createSyncAction(ADD_STOCK_ITEM)
 export const removeStockItem = createSyncAction(REMOVE_STOCK_ITEM)
 export const wipeStockSearchList = createSyncAction(WIPE_STOCK_SEARCH_LIST)
-export const updateLogoStockItem = createSyncAction(UPDATE_LOGO_STOCK_ITEM)
+export const fetchStockItemDetails = createSyncAction(FETCH_STOCK_ITEM_DETAILS)
+export const updateStockItem = createSyncAction(UPDATE_STOCK_ITEM)
 
 /* ------------- Initial State ------------- */
 const INITIAL_STATE = {
@@ -85,12 +87,16 @@ const removeStockItemReducer = (state = INITIAL_STATE, element) => {
   }
 }
 
-const updateLogoStockItemReducer = (state = INITIAL_STATE, { symbol, logo }) => {
+const updateStockItemReducer = (state = INITIAL_STATE, { type, ...item }) => {
   const { stockList } = state
+  const { symbol } = item
+
+  console.log(item)
 
   const stockCopy = stockList.map(stock => {
     if (stock.symbol === symbol) {
-      return { ...stock, logo }
+      console.log({ ...stock, ...item })
+      return { ...stock, ...item }
     }
     return stock
   })
@@ -107,5 +113,5 @@ export default createReducer(INITIAL_STATE, {
   [WIPE_STOCK_SEARCH_LIST]: wipeStockSearchListReducer,
   [ADD_STOCK_ITEM]: addStockItemReducer,
   [REMOVE_STOCK_ITEM]: removeStockItemReducer,
-  [UPDATE_LOGO_STOCK_ITEM]: updateLogoStockItemReducer,
+  [UPDATE_STOCK_ITEM]: updateStockItemReducer,
 })

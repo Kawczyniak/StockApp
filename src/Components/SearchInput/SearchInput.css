@@ -1,0 +1,16 @@
+.search-input-container {
+  position: relative; }
+  .search-input-container .search-input {
+    width: 300px; }
+  .search-input-container .search-input-list {
+    position: absolute;
+    z-index: 1; }
+    .search-input-container .search-input-list .search-input-list-item {
+      display: block;
+      width: auto; }
+      .search-input-container .search-input-list .search-input-list-item .left-element {
+        display: inline-block;
+        margin-right: 50px; }
+      .search-input-container .search-input-list .search-input-list-item .right-element {
+        display: inline-block;
+        float: right; }

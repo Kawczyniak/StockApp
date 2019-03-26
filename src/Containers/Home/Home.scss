@@ -1,6 +1,12 @@
 .home-container {
   margin: 20px;
 
+  .home-stock-card-list {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+
   .input-container {
     width: 300px;
   }

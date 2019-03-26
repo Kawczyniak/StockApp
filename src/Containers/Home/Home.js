@@ -4,6 +4,7 @@ import './Home.scss'
 import { ListGroup, ListGroupItem } from 'reactstrap'
 import { removeStockItem, StockSelector } from '../../Redux/StockRedux'
 import { connect } from 'react-redux'
+import { Card } from '../../Components/Card/Card'
 
 class Home extends Component {
   render() {
@@ -15,15 +16,11 @@ class Home extends Component {
       <div className={'home-container'}>
         <SearchInput />
         {stockList && (
-          <ListGroup className={'search-input-list'}>
-            {stockList.map(item => (
-              <ListGroupItem key={item.symbol} className={'search-input-list-item'}>
-                <div className={'left-element'}>{item.symbol}</div>
-                <div className={'right-element'}>{item.name}</div>
-                {item.logo && <img src={item.logo} />}
-              </ListGroupItem>
+          <div className={'home-stock-card-list'}>
+            {stockList.map(stock => (
+              <Card stock={stock} />
             ))}
-          </ListGroup>
+          </div>
         )}
       </div>
     )
