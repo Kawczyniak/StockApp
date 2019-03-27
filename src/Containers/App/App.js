@@ -20,12 +20,10 @@ class App extends Component {
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <Router history={history}>
-            <>
               <Switch>
                 <Route path="/" component={Home} />
                 <Route path="*" component={NotFound} />
               </Switch>
-            </>
           </Router>
         </PersistGate>
       </Provider>
