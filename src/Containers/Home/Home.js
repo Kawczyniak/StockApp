@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SearchInput from '../../Components/SearchInput/SearchInput'
 import './Home.scss'
-import { removeStockItem, StockSelector } from '../../Redux/StockRedux'
+import { StockSelector } from '../../Redux/StockRedux'
 import { connect } from 'react-redux'
 import Card from '../../Components/Card/Card'
 
@@ -29,11 +29,4 @@ const mapStateToProps = state => ({
   stockList: StockSelector.stockList(state),
 })
 
-const mapDispatchToProps = {
-  removeStockItem,
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Home)
+export default connect(mapStateToProps)(Home)

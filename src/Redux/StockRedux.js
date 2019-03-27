@@ -81,17 +81,21 @@ const addStockItemReducer = (state = INITIAL_STATE, { item }) => {
   }
 }
 
-const removeStockItemReducer = (state = INITIAL_STATE, element) => {
+const removeStockItemReducer = (state = INITIAL_STATE, { symbol }) => {
+  const { stockList } = state
+
+  const stockIndex = stockList.findIndex(stock => stock.symbol === symbol)
+  const stockListCopy = [...stockList.slice(0, stockIndex), ...stockList.slice(stockIndex + 1)]
+
   return {
     ...state,
+    stockList: stockListCopy,
   }
 }
 
 const updateStockItemReducer = (state = INITIAL_STATE, { type, ...item }) => {
   const { stockList } = state
   const { symbol } = item
-
-  console.log(item)
 
   const stockCopy = stockList.map(stock => {
     if (stock.symbol === symbol) {

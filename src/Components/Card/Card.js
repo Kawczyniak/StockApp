@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import './Card.scss'
 import { CloseButton } from '../CloseButton/CloseButton'
+import { removeStockItem } from '../../Redux/StockRedux'
 
 class Card extends Component {
   constructor(props) {
@@ -27,7 +29,13 @@ class Card extends Component {
   }
 
   toggleCloseButton = e => {
-    this.setState((prevState) => ({showCloseButton: !prevState.showCloseButton}))
+    this.setState(prevState => ({ showCloseButton: !prevState.showCloseButton }))
+  }
+
+  deleteItem = symbol => {
+    const { removeStockItem } = this.props
+
+    removeStockItem({ symbol })
   }
 
   render() {
@@ -50,7 +58,15 @@ class Card extends Component {
     const { showCloseButton } = this.state
 
     return (
-      <div className={'elevation-1dp card-container'} onMouseEnter={this.toggleCloseButton} onMouseLeave={this.toggleCloseButton}>
+      <div
+        className={'elevation-1dp card-container'}
+        onMouseEnter={() => {
+          this.setState({ showCloseButton: true })
+        }}
+        onMouseLeave={() => {
+          this.setState({ showCloseButton: false })
+        }}
+      >
         <div className={'card-row'}>
           {logo && (
             <div className={'elevation-1dp logo-container margin-right'}>
@@ -82,10 +98,17 @@ class Card extends Component {
             )}
           </div>
         </div>
-        {showCloseButton && <CloseButton />}
+        {showCloseButton && <CloseButton onClick={() => this.deleteItem(symbol)} />}
       </div>
     )
   }
 }
 
-export default Card
+const mapDispatchToProps = {
+  removeStockItem,
+}
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Card)
