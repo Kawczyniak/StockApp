@@ -1,0 +1,46 @@
+// COLORS
+$grey: #717171;
+$black: #000000;
+
+.close-container {
+  position: absolute;
+  cursor: pointer;
+  top: 5px;
+  right: 20px;
+}
+
+.leftright {
+  height: 4px;
+  width: 14px;
+  top: 5px;
+  left: 0px;
+  position: absolute;
+  background-color: $grey;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: all 0.3s ease-in;
+}
+
+.rightleft {
+  height: 4px;
+  width: 14px;
+  top: 5px;
+  left: 0px;
+  position: absolute;
+  background-color: $grey;
+  border-radius: 2px;
+  transform: rotate(-45deg);
+  transition: all 0.3s ease-in;
+}
+
+.close-container:hover .leftright {
+  transform: rotate(-45deg);
+  background-color: $black;
+}
+.close-container:hover .rightleft {
+  transform: rotate(45deg);
+  background-color: $black;
+}
+.close-container:hover label {
+  opacity: 1;
+}

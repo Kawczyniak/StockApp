@@ -1,10 +1,11 @@
 .home-container {
   margin: 20px;
 
+  .title {
+    text-align: center;
+  }
+
   .home-stock-card-list {
-    display: flex;
-    flex: 1;
-    flex-wrap: wrap;
   }
 
   .input-container {

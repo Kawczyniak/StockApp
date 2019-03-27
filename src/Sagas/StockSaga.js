@@ -76,6 +76,7 @@ export function* fetchStockItemDetailsSaga(action) {
       stock = stockEndpointPayload['Global Quote']
       for (let oldProps in stock) {
         let newProps = oldProps.slice(4)
+        console.log(renameProp(oldProps, newProps, stock))
         stock = renameProp(oldProps, newProps, stock)
       }
     }
@@ -100,7 +101,7 @@ export function* addStockItemSaga(action) {
 }
 
 const renameProp = (oldProp, newProp, { [oldProp]: old, ...others }) => ({
-  [newProp]: old,
+  [camelize(newProp)]: old,
   ...others,
 })
 
@@ -117,3 +118,10 @@ const prepareCompanyName = name => {
 
   return name
 }
+
+const camelize = str =>
+  str
+    .replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) =>
+      index == 0 ? letter.toLowerCase() : letter.toUpperCase(),
+    )
+    .replace(/\s+/g, '')

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Input, ListGroup, ListGroupItem } from 'reactstrap'
+import { FormGroup, Input, Label, ListGroup, ListGroupItem } from 'reactstrap'
 import './SearchInput.scss'
 import {
   StockSelector,
@@ -38,7 +38,16 @@ class SearchInput extends Component {
 
     return (
       <div className={'search-input-container'}>
-        <Input className={'search-input'} onChange={this.onChange} value={search} />
+        <FormGroup>
+          <Label for="company-input">Company</Label>
+          <Input
+            id={'company-input'}
+            className={'search-input'}
+            onChange={this.onChange}
+            value={search}
+            placeholder={'Company name or symbol'}
+          />
+        </FormGroup>
         {searchList && (
           <ListGroup className={'search-input-list'}>
             {searchList.map(item => (

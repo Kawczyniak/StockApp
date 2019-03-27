@@ -22,16 +22,6 @@ class App extends Component {
           <Router history={history}>
             <>
               <Switch>
-                {/*{Routes.map((route, index) => (*/}
-                {/*<Route*/}
-                {/*key={route.path}*/}
-                {/*path={route.path}*/}
-                {/*exact={route.exact}*/}
-                {/*render={props => (*/}
-                {/*<Layout component={route.component} route={route} renderProps={props} />*/}
-                {/*)}*/}
-                {/*/>*/}
-                {/*))}*/}
                 <Route path="/" component={Home} />
                 <Route path="*" component={NotFound} />
               </Switch>

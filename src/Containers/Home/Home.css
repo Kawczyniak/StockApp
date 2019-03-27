@@ -1,10 +1,8 @@
 .home-container {
   margin: 20px; }
 
-.home-container .home-stock-card-list {
-  display: flex;
-  flex: 1;
-  flex-wrap: wrap; }
+.home-container .title {
+  text-align: center; }
 
 .home-container .input-container {
   width: 300px; }
