@@ -1,5 +1,4 @@
 import axios from 'axios'
-import StockSelector from '../Redux/StockRedux'
 
 const api = axios.create({
   baseURL: 'https://www.alphavantage.co',
@@ -13,15 +12,15 @@ const apiLogo = axios.create({
   timeout: 30000,
 })
 
-api.interceptors.response.use(response => {
-  console.log('Response:', response)
-  return response
-})
-
-apiLogo.interceptors.response.use(response => {
-  console.log('Response logoApi:', response)
-  return response
-})
+// api.interceptors.response.use(response => {
+//   console.log('Response:', response)
+//   return response
+// })
+//
+// apiLogo.interceptors.response.use(response => {
+//   console.log('Response logoApi:', response)
+//   return response
+// })
 
 const runApi = async ({ method = 'get', body, path }) => {
   const { data, statusText, status } = await api[method](`${path}`, body)

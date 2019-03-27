@@ -99,7 +99,6 @@ const updateStockItemReducer = (state = INITIAL_STATE, { type, ...item }) => {
 
   const stockCopy = stockList.map(stock => {
     if (stock.symbol === symbol) {
-      console.log({ ...stock, ...item })
       return { ...stock, ...item }
     }
     return stock

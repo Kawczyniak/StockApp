@@ -54,8 +54,6 @@ export function* fetchStockItemDetailsSaga(action) {
       query: preparedName,
     })
 
-    console.log(logoPayload)
-
     // checking if logo is available to update item
     if (logoPayload.length > 0) {
       yield put(updateStockItem({ symbol: symbol, logo: logoPayload[0].logo }))
@@ -76,13 +74,11 @@ export function* fetchStockItemDetailsSaga(action) {
       stock = stockEndpointPayload['Global Quote']
       for (let oldProps in stock) {
         let newProps = oldProps.slice(4)
-        console.log(renameProp(oldProps, newProps, stock))
         stock = renameProp(oldProps, newProps, stock)
       }
     }
 
     if (stock) {
-      console.log(stock)
       yield put(updateStockItem({ ...stock }))
     }
   } catch (error) {
@@ -122,6 +118,6 @@ const prepareCompanyName = name => {
 const camelize = str =>
   str
     .replace(/(?:^\w|[A-Z]|\b\w)/g, (letter, index) =>
-      index == 0 ? letter.toLowerCase() : letter.toUpperCase(),
+      index === 0 ? letter.toLowerCase() : letter.toUpperCase(),
     )
     .replace(/\s+/g, '')

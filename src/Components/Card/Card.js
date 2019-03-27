@@ -28,10 +28,6 @@ class Card extends Component {
     return true
   }
 
-  toggleCloseButton = e => {
-    this.setState(prevState => ({ showCloseButton: !prevState.showCloseButton }))
-  }
-
   deleteItem = symbol => {
     const { removeStockItem } = this.props
 
@@ -70,7 +66,7 @@ class Card extends Component {
         <div className={'card-row'}>
           {logo && (
             <div className={'elevation-1dp logo-container margin-right'}>
-              <img className={'logo'} src={logo} />
+              <img className={'logo'} alt="logo" src={logo} />
             </div>
           )}
           <div>
